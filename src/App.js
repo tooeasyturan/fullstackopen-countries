@@ -23,10 +23,15 @@ const App = () => {
     setSearched(event.target.value)
   }
 
+  const showCountryButtonHandler = (event) => {
+    setSearched(event.target.attributes.country.value)
+  }
+
+
   return (
     <div>
       <Search handleSearch={handleSearch} searched={searched} />
-      <Countries countries={countries} searched={searched} />
+      <Countries countries={countries} searched={searched} buttonHandler={showCountryButtonHandler} />
     </div>
   );
 }

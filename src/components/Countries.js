@@ -1,13 +1,14 @@
 import React from 'react'
 import CountryInfo from './CountryInfo'
 
-const Countries = ({ countries, searched }) => {
+
+const Countries = ({ countries, searched, buttonHandler }) => {
 
   let showSearched = countries.filter(country => {
     return country.name.toUpperCase().includes(searched.toUpperCase())
   })
 
-  const searchedCountry = showSearched.map(searchedCountry => <p>{searchedCountry.name}</p>)
+  const rows = () => showSearched.map(searchedCountry => <p>{searchedCountry.name} <button onClick={buttonHandler} country={searchedCountry.name}>View</button></p>)
 
 
 
@@ -25,14 +26,16 @@ const Countries = ({ countries, searched }) => {
 
   if (showSearched.length === 1) {
     return (
-      <CountryInfo country={showSearched[0]} />
+      <>
+        <CountryInfo country={showSearched[0]} />
+      </>
     )
   }
 
   else {
     return (
       <div>
-        {searchedCountry}
+        {rows()}
       </div>
     )
   }

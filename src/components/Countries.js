@@ -1,4 +1,5 @@
 import React from 'react'
+import CountryInfo from './CountryInfo'
 
 const Countries = ({ countries, searched }) => {
 
@@ -6,7 +7,9 @@ const Countries = ({ countries, searched }) => {
     return country.name.toUpperCase().includes(searched.toUpperCase())
   })
 
-  console.log(showSearched)
+  const searchedCountry = showSearched.map(searchedCountry => <p>{searchedCountry.name}</p>)
+
+
 
   if (searched < 1) {
     return (
@@ -18,21 +21,22 @@ const Countries = ({ countries, searched }) => {
     return (
       <p>Too many matches, specify another filter</p>
     )
-  } else {
+  }
 
-    const searchedCountry = () => {
-      return (
-        showSearched.map(searchedCountry => <p>{searchedCountry.name}</p>)
-      )
-    }
+  if (showSearched.length === 1) {
+    return (
+      <CountryInfo country={showSearched[0]} />
+    )
+  }
 
-
+  else {
     return (
       <div>
-        {searchedCountry()}
+        {searchedCountry}
       </div>
     )
   }
 }
 
 export default Countries
+
